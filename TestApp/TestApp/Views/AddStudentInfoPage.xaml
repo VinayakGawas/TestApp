@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TestApp.Views.AddStudentInfoPage">
+    <ScrollView>
+        <StackLayout>
+            <Label Text="Name"/>
+            <Entry Text="{Binding studentInfo.Name}"/>
+
+            <Label Text="Gender"/>
+            <Entry Text="{Binding studentInfo.Gender}"/>
+
+            <Label Text="Email Id"/>
+            <Entry Text="{Binding studentInfo.emailId}"/>
+
+            <Label Text="Contact Number"/>
+            <Entry Text="{Binding studentInfo.ContactNo}"/>
+
+            <Label Text="Address"/>
+
+            <Label Text="Address Line1"/>
+            <Entry Text="{Binding studentInfo.AddressLine1}"/>
+
+            <Label Text="Street"/>
+            <Entry Text="{Binding studentInfo.Street}"/>
+
+            <Label Text="City"/>
+            <Entry Text="{Binding studentInfo.City}"/>
+
+            <Label Text="Country"/>
+            <Entry Text="{Binding studentInfo.Country}"/>
+
+            <Label Text="Postal Code"/>
+            <Entry Text="{Binding studentInfo.PostalCode}"/>
+            
+            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
+            <Label Text="Upload Documents"/>
+
+            <Picker>
+                <Picker.Items>
+                    <x:String>Aadhar Card</x:String>
+                    <x:String>Pan Card</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            
+            <Entry Text="{Binding DocuNumber}" Placeholder="Enter Number"/>
+            <Button Text="Upload Image" x:Name="UploadImageButton"/>
+
+            <Button Text="Save" Command="{Binding SaveCommand}"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
