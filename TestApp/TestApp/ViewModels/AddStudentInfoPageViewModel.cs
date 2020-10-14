@@ -20,17 +20,29 @@ namespace TestApp.ViewModels
         }
         public DelegateCommand SaveCommand { get; set; }
         public IGenericRepo<StudentInfo> _studentInfoRepo { get; set; }
-        public AddStudentInfoPageViewModel(INavigationService navigationService, IGenericRepo<StudentInfo> studentInfoRepo, IPageDialogService pageDialog) : base(navigationService, pageDialog)
+        public IGenericRepo<AddressInfo> _addressRepo { get; set; }
+        public AddStudentInfoPageViewModel(INavigationService navigationService, IPageDialogService pageDialog,
+            IGenericRepo<StudentInfo> studentInfoRepo, IGenericRepo<AddressInfo> addressInfoRepo) : base(navigationService, pageDialog)
         {
             _studentInfoRepo = studentInfoRepo;
+            _addressRepo = addressInfoRepo;
             SaveCommand = new DelegateCommand(SaveInfo);
             studentInfo = new StudentInfo();
+            studentInfo.address = new AddressInfo();
         }
 
-        private void SaveInfo()
+        private async void SaveInfo()
         {
-            _studentInfoRepo.InsertOrReplace(studentInfo);
-            NavigationService.GoBackAsync();
+            var a =await PageDialogService.DisplayAlertAsync("","Do you want to save this?","Yes","No");
+            if (a)
+            {
+                studentInfo.StudentId = Guid.NewGuid().ToString();
+                studentInfo.address.AddressId = Guid.NewGuid().ToString();
+                studentInfo.address.StudentID = studentInfo.StudentId;
+                _studentInfoRepo.InsertOrReplace(studentInfo);
+                _addressRepo.InsertOrReplace(studentInfo.address);
+                await NavigationService.GoBackAsync();
+            }
         }
     }
 }

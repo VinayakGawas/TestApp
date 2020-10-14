@@ -30,7 +30,8 @@ namespace TestApp.Repo
         }
         public TableQuery<T> QueryTable()
         {
-            return DependencyService.Get<IDBInterface>().GetConnection().Table<T>();
+            var a =  DependencyService.Get<IDBInterface>().GetConnection().Table<T>();
+            return a;
         }
 
         public void Delete(string id)

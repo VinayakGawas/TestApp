@@ -3,52 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             Visual="Material"
              x:Class="TestApp.Views.AddStudentInfoPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry" >
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style TargetType="BoxView" >
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="Gray"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
-        <StackLayout>
-            <Label Text="Name"/>
-            <Entry Text="{Binding studentInfo.Name}"/>
+        <StackLayout Padding="15">
+            <!--<Label Text="Name"/>-->
+            <Entry Text="{Binding studentInfo.Name}" Placeholder="Enter Your Name"/>
 
-            <Label Text="Gender"/>
-            <Entry Text="{Binding studentInfo.Gender}"/>
+            <!--<Label Text="Gender"/>-->
+            <Entry Text="{Binding studentInfo.Gender}" Placeholder="Enter Gender"/>
 
-            <Label Text="Email Id"/>
-            <Entry Text="{Binding studentInfo.emailId}"/>
+            <!--<Label Text="Email Id"/>-->
+            <Entry Text="{Binding studentInfo.emailId}" Placeholder="Enter Email Id"/>
 
-            <Label Text="Contact Number"/>
-            <Entry Text="{Binding studentInfo.ContactNo}"/>
+            <!--<Label Text="Contact Number"/>-->
+            <Entry Text="{Binding studentInfo.ContactNo}" Placeholder="Enter Contact Number"/>
 
-            <Label Text="Address"/>
-
-            <Label Text="Address Line1"/>
-            <Entry Text="{Binding studentInfo.AddressLine1}"/>
-
-            <Label Text="Street"/>
-            <Entry Text="{Binding studentInfo.Street}"/>
-
-            <Label Text="City"/>
-            <Entry Text="{Binding studentInfo.City}"/>
-
-            <Label Text="Country"/>
-            <Entry Text="{Binding studentInfo.Country}"/>
-
-            <Label Text="Postal Code"/>
-            <Entry Text="{Binding studentInfo.PostalCode}"/>
+            <BoxView/>
+            <Label Text="Address" FontSize="18" FontAttributes="Bold" Margin="10" HorizontalOptions="Center"/>
+            <BoxView/>
             
-            <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
-            <Label Text="Upload Documents"/>
+            <!--<Label Text="Address Line1"/>-->
+            <Entry Text="{Binding studentInfo.address.AddressLine1}" Placeholder="Enter Address"/>
 
-            <Picker>
-                <Picker.Items>
-                    <x:String>Aadhar Card</x:String>
-                    <x:String>Pan Card</x:String>
-                </Picker.Items>
-            </Picker>
-            
-            
-            <Entry Text="{Binding DocuNumber}" Placeholder="Enter Number"/>
-            <Button Text="Upload Image" x:Name="UploadImageButton"/>
+            <!--<Label Text="Street"/>-->
+            <Entry Text="{Binding studentInfo.address.Street}" Placeholder="Enter Street"/>
 
+            <!--<Label Text="City"/>-->
+            <Entry Text="{Binding studentInfo.address.City}" Placeholder="Enter City"/>
+
+            <!--<Label Text="Country"/>-->
+            <Entry Text="{Binding studentInfo.address.Country}" Placeholder="Enter Country"/>
+
+            <!--<Label Text="Postal Code"/>-->
+            <Entry Text="{Binding studentInfo.address.PostalCode}" Placeholder="Enter Postal Code"/>
+
+            <!--<BoxView/>
+            <Label Text="Upload Documents" FontAttributes="Bold" FontSize="18" Margin="10" HorizontalOptions="Center"/>
+            <BoxView/>
+
+            <StackLayout Orientation="Horizontal">
+                <Entry Text="{Binding AadharCardNumber}" HorizontalOptions="FillAndExpand" Placeholder="Enter Aadhar Card Number"/>
+                <Button Text="Upload" x:Name="UploadAadharCardButton" Visual="Default" Clicked="UploadAadharCardButton_Clicked" BackgroundColor="Transparent" TextColor="Black"/>
+               
+            </StackLayout>
+            <Image x:Name="AadharImage" HeightRequest="50" WidthRequest="50"/>--><!--
+            <StackLayout Orientation="Horizontal">
+                <Entry Text="{Binding PanCardNumber}" HorizontalOptions="FillAndExpand" Placeholder="Enter Pan Card Number"/>
+                <Button Text="Upload" BackgroundColor="Transparent" TextColor="Black" Visual="Default" x:Name="UploadPanCardButton" Clicked="UploadPanCardButton_Clicked"/>
+            </StackLayout>
+            <Image x:Name="PanImage" HeightRequest="50" WidthRequest="50"/>-->
             <Button Text="Save" Command="{Binding SaveCommand}"/>
         </StackLayout>
     </ScrollView>

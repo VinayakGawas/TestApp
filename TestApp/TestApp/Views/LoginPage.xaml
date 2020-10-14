@@ -3,15 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             Visual="Material"
+             NavigationPage.HasNavigationBar="False"
              x:Class="TestApp.Views.LoginPage">
-    <StackLayout>
-        <Entry Text="{Binding _user.UserName}"/>
-        <Entry Text="{Binding _user.Password}"/>
-        <Button Text="Login" Command="{Binding LoginCommand}"/>
-        <Label Text="New User? Register Here">
-            <Label.GestureRecognizers>
-                
-            </Label.GestureRecognizers>
-        </Label>
-    </StackLayout>
+    <Frame HasShadow="True" Padding="10">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+        <Entry Text="{Binding _user.UserName}" Placeholder="Enter Username" Margin="10"/>
+        <Entry Text="{Binding _user.Password}" Placeholder="Enter Password" Margin="10"/>
+            <Button Text="Login" Command="{Binding LoginCommand}" HorizontalOptions="Center" Margin="20"/>
+        </StackLayout>
+    </Frame>
 </ContentPage>

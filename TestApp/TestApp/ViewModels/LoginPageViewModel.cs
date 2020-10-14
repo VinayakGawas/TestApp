@@ -39,7 +39,15 @@ namespace TestApp.ViewModels
                 return;
             }
 
-            NavigationService.NavigateAsync(nameof(HomePage));
+            if ((_user.UserName.ToLower() == "student" || _user.UserName.ToLower() == "admin") && _user.Password =="123")
+            {
+                NavigationService.NavigateAsync(nameof(HomePage));
+            }
+            else
+            {
+                PageDialogService.DisplayAlertAsync("", "Wrong username and Password.", "OK");
+                return;
+            }
         }
     }
 }

@@ -3,7 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+          NavigationPage.HasBackButton="False"
+             Title="Home Page"
              x:Class="TestApp.Views.HomePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
     <StackLayout>
         <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
@@ -11,6 +17,29 @@
         <StackLayout>
             <Button Text="Add Info" Command="{Binding AddInfoCommand}"/>
 
+        </StackLayout>
+    </StackLayout>
+        <StackLayout>
+            <ListView ItemsSource="{Binding AllStudentsList}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding Class}"/>
+                                <Label Text="{Binding Gender}"/>
+                                <Label Text="{Binding emailId}"/>
+                                <Label Text="{Binding ContactNo}"/>
+                                <Label Text="{Binding address.AddressLine1}"/>
+                                <Label Text="{Binding address.Street}"/>
+                                <Label Text="{Binding address.City}"/>
+                                <Label Text="{Binding address.Country}"/>
+                                <Label Text="{Binding address.PostalCode}"/> 
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </StackLayout>
 </ContentPage>

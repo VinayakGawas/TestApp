@@ -40,13 +40,7 @@ namespace TestApp.Model
             get { return addressInfo; }
             set { SetProperty(ref addressInfo, value); }
         }
-        private DocumentsInfo _docuInfo;
-        [Ignore]
-        public DocumentsInfo docuInfo
-        {
-            get { return _docuInfo; }
-            set { SetProperty(ref _docuInfo, value); }
-        }
+        
         private string _emailID;
         public string emailId
         {
@@ -64,6 +58,31 @@ namespace TestApp.Model
         {
             get { return _isAudited; }
             set { SetProperty(ref _isAudited, value); }
+        }
+        private byte[] _panImage;
+        public byte[] PanCardImage
+        {
+            get { return _panImage; }
+            set { SetProperty(ref _panImage, value); }
+        }
+        private string _panCardNumber;
+        public string PanCardNumber
+        {
+            get { return _panCardNumber; }
+            set { SetProperty(ref _panCardNumber, value); }
+        }
+
+        private byte[] _aadharImage;
+        public byte[] AadharCardImage
+        {
+            get { return _aadharImage; }
+            set { SetProperty(ref _aadharImage, value); }
+        }
+        private string _aardharCardNumber;
+        public string AadharCardNumber
+        {
+            get { return _aardharCardNumber; }
+            set { SetProperty(ref _aardharCardNumber, value); }
         }
     }
 }
