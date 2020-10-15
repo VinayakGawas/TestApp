@@ -32,6 +32,12 @@ namespace TestApp.Helpers
             {
                 dbConn.CreateTable<DocumentsInfo>();
             }
+
+            var UserTableInfo = dbConn.GetTableInfo(nameof(User));
+            if (!UserTableInfo.Any())
+            {
+                dbConn.CreateTable<User>();
+            }
         }
         public static void DeleteTables()
         {
@@ -39,6 +45,7 @@ namespace TestApp.Helpers
             dbConn.DropTable<StudentInfo>();
             dbConn.DropTable<AddressInfo>();
             dbConn.DropTable<DocumentsInfo>();
+            dbConn.DropTable<User>();
         }
 
     }

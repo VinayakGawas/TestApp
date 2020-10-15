@@ -7,6 +7,12 @@ namespace TestApp.Model
 {
     public class User : BindableBase
     {
+        private string _userId;
+        public string UserId
+        {
+            get { return _userId; }
+            set { SetProperty(ref _userId, value); }
+        }
         private string _userName;
         public string UserName
         {

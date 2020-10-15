@@ -5,6 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
           NavigationPage.HasBackButton="False"
              Title="Home Page"
+            
+             BackgroundColor="#8EE4AF"
              x:Class="TestApp.Views.HomePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}"/>
@@ -20,22 +22,116 @@
         </StackLayout>
     </StackLayout>
         <StackLayout>
-            <ListView ItemsSource="{Binding AllStudentsList}" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding AllStudentsList}" HasUnevenRows="True" SelectionMode="None"
+                      SeparatorColor="Transparent" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Class}"/>
-                                <Label Text="{Binding Gender}"/>
-                                <Label Text="{Binding emailId}"/>
-                                <Label Text="{Binding ContactNo}"/>
-                                <Label Text="{Binding address.AddressLine1}"/>
-                                <Label Text="{Binding address.Street}"/>
-                                <Label Text="{Binding address.City}"/>
-                                <Label Text="{Binding address.Country}"/>
-                                <Label Text="{Binding address.PostalCode}"/> 
+                            <Frame Margin="10" Padding="0" CornerRadius="10" BackgroundColor="#379683">
+                            <StackLayout Padding="15">
+                                    <StackLayout.Resources>
+                                        <ResourceDictionary>
+                                            <Style TargetType="Label" >
+                                                <Setter Property="Margin" Value="2"/>
+                                                <Setter Property="TextColor"  Value="White"/>
+                                            </Style>
+                                        </ResourceDictionary>
+                                    </StackLayout.Resources>
+                                <Label >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Student Name : " FontAttributes="Bold"/>
+                                            <Span Text="{Binding Name}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Class : "  FontAttributes="Bold"/>
+                                            <Span Text="{Binding Class}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <Label >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Gender : "  FontAttributes="Bold"/>
+                                            <Span Text="{Binding Gender}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Email ID : "  FontAttributes="Bold"/>
+                                            <Span Text="{Binding emailId}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Contact No. : "  FontAttributes="Bold"/>
+                                            <Span Text="{Binding ContactNo}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                <Frame CornerRadius="10" Margin="0,15,0,0" BackgroundColor="#EDF5E1">
+                                    <StackLayout>
+                                            <Label TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Address : "  FontAttributes="Bold"/>
+                                                    <Span Text="{Binding address.AddressLine1}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                            <Label TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Street : "  FontAttributes="Bold"/>
+                                                    <Span Text="{Binding address.Street}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                            <Label TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="City : "  FontAttributes="Bold"/>
+                                                    <Span Text="{Binding address.City}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                            <Label TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Country : "  FontAttributes="Bold"/>
+                                                    <Span Text="{Binding address.Country}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                            <Label TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Postal Code : "  FontAttributes="Bold"/>
+                                                    <Span Text="{Binding address.PostalCode}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

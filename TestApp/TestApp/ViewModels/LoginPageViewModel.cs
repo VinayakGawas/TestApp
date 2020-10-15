@@ -25,6 +25,11 @@ namespace TestApp.ViewModels
             LoginCommand = new DelegateCommand(Login);
         }
 
+        internal void NavigateToSignUp()
+        {
+            NavigationService.NavigateAsync(nameof(SignUpPage));
+        }
+
         private void Login()
         {
             if (string.IsNullOrEmpty(_user.UserName))

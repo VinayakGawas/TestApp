@@ -9,8 +9,15 @@
     <Frame HasShadow="True" Padding="10">
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
         <Entry Text="{Binding _user.UserName}" Placeholder="Enter Username" Margin="10"/>
-        <Entry Text="{Binding _user.Password}" Placeholder="Enter Password" Margin="10"/>
+        <Entry Text="{Binding _user.Password}" IsPassword="True" Placeholder="Enter Password" Margin="10"/>
             <Button Text="Login" Command="{Binding LoginCommand}" HorizontalOptions="Center" Margin="20"/>
+
+            <Label Text="Register" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+
         </StackLayout>
     </Frame>
 </ContentPage>
