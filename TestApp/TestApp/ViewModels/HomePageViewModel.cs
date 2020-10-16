@@ -67,10 +67,11 @@ namespace TestApp.ViewModels
                 var data = AllStudentsList.FirstOrDefault(x=>x.UserId == App.CurrentUser.UserId);
                 if (data == null)
                 {
-                    if(UserRole == "Student")
-                        PageDialogService.DisplayAlertAsync("","Please fill Information","Ok");
+                    if (UserRole == "Student")
+                        PageDialogService.DisplayAlertAsync("", "Please fill Information", "Ok");
                     else
                     {
+                        if(a== null)
                         PageDialogService.DisplayAlertAsync("", "No Information to show..!!", "Ok");
                     }
                 }
@@ -83,14 +84,14 @@ namespace TestApp.ViewModels
 
         private async void Logout()
         {
-            var a = await PageDialogService.DisplayAlertAsync("Log Out?","Do you want to log out?","Yes","No");
+            var response = await PageDialogService.DisplayAlertAsync("Log Out?","Do you want to log out?","Yes","No");
             //await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            if(response)
             await NavigationService.NavigateAsync("app:///NavigationPage/LoginPage");
         }
 
         private void AddStudentInfo()
         {
-            //9662476093
             NavigationService.NavigateAsync(nameof(AddStudentInfoPage),new NavigationParameters { {"CurrentUser", CurrentUser } });
         }
        
