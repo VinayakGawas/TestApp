@@ -3,37 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-          NavigationPage.HasBackButton="False"
              Title="Home Page"
-            
-             BackgroundColor="#8EE4AF"
+            NavigationPage.HasBackButton="False"
+              Visual="Material"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="True"
              x:Class="TestApp.Views.HomePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Logout" Command="{Binding LogoutCommand}"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
-    <StackLayout>
-        <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
         <StackLayout>
-            <Button Text="Add Info" Command="{Binding AddInfoCommand}"/>
+            <StackLayout>
+                <Button Text="Edit Info" BackgroundColor="#3700b3"
+                        TextColor="White" Margin="20" HorizontalOptions="Center" IsVisible="False" Command="{Binding AddInfoCommand}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding UserRole}" Value="Student">
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
 
-        </StackLayout>
+            </StackLayout>
     </StackLayout>
         <StackLayout>
             <ListView ItemsSource="{Binding AllStudentsList}" HasUnevenRows="True" SelectionMode="None"
-                      SeparatorColor="Transparent" SeparatorVisibility="None">
+                      SeparatorColor="Transparent" SeparatorVisibility="None" IsVisible="False">
+                <ListView.Triggers>
+                    <DataTrigger TargetType="ListView" Binding="{Binding UserRole}" Value="Admin">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </ListView.Triggers>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame Margin="10" Padding="0" CornerRadius="10" BackgroundColor="#379683">
+                            <Frame Margin="10" Padding="0" CornerRadius="10" BorderColor="#3700B3">
                             <StackLayout Padding="15">
                                     <StackLayout.Resources>
                                         <ResourceDictionary>
                                             <Style TargetType="Label" >
                                                 <Setter Property="Margin" Value="2"/>
-                                                <Setter Property="TextColor"  Value="White"/>
+                                                <Setter Property="TextColor"  Value="Black"/>
                                             </Style>
                                         </ResourceDictionary>
                                     </StackLayout.Resources>
@@ -81,10 +91,18 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-                                
-                                <Frame CornerRadius="10" Margin="0,15,0,0" BackgroundColor="#EDF5E1">
+
+                                    <Frame CornerRadius="10" Margin="0,15,0,0"  BackgroundColor="#3700B3">
                                     <StackLayout>
-                                            <Label TextColor="Black">
+                                            <StackLayout.Resources>
+                                                <ResourceDictionary>
+                                                    <Style TargetType="Label" >
+                                                        <Setter Property="Margin" Value="2"/>
+                                                        <Setter Property="TextColor"  Value="White"/>
+                                                    </Style>
+                                                </ResourceDictionary>
+                                            </StackLayout.Resources>
+                                            <Label >
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Address : "  FontAttributes="Bold"/>
@@ -93,7 +111,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                            <Label TextColor="Black">
+                                            <Label>
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Street : "  FontAttributes="Bold"/>
@@ -102,7 +120,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                            <Label TextColor="Black">
+                                            <Label>
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="City : "  FontAttributes="Bold"/>
@@ -111,7 +129,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                            <Label TextColor="Black">
+                                            <Label>
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Country : "  FontAttributes="Bold"/>
@@ -120,22 +138,145 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                            <Label TextColor="Black">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Postal Code : "  FontAttributes="Bold"/>
-                                                    <Span Text="{Binding address.PostalCode}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </StackLayout>
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Postal Code : "  FontAttributes="Bold"/>
+                                                        <Span Text="{Binding address.PostalCode}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
                                 </Frame>
-                            </StackLayout>
+                                    <Button x:Name="VerifyButton" Clicked="VerifyButton_Clicked" Text="Click here to Audit !"
+                                                    HorizontalOptions="CenterAndExpand" TextColor="Crimson" BackgroundColor="Transparent">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsAudited}" Value="True">
+                                                <Setter Property="Text" Value="√ Audited"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsAudited}" Value="True">
+                                                <Setter Property="TextColor" Value="DarkGreen"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+
+                                    </Button>
+                                </StackLayout>
                             </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Frame Margin="10" Padding="0" CornerRadius="10" IsVisible="False" BackgroundColor="#3700B3">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding UserRole}" Value="Student">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+                <StackLayout Padding="15">
+                    <StackLayout.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Label" >
+                                <Setter Property="Margin" Value="2"/>
+                                <Setter Property="TextColor"  Value="White"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </StackLayout.Resources>
+                    <Label >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Student Name : " FontAttributes="Bold"/>
+                                <Span Text="{Binding CurrentUser.Name}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Class : "  FontAttributes="Bold"/>
+                                <Span Text="{Binding CurrentUser.Class}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Gender : "  FontAttributes="Bold"/>
+                                <Span Text="{Binding CurrentUser.Gender}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Email ID : "  FontAttributes="Bold"/>
+                                <Span Text="{Binding CurrentUser.emailId}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Contact No. : "  FontAttributes="Bold"/>
+                                <Span Text="{Binding CurrentUser.ContactNo}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Frame CornerRadius="10" Margin="0,15,0,0" BackgroundColor="#EDF5E1">
+                        <StackLayout>
+                            <Label TextColor="Black">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Address : "  FontAttributes="Bold"/>
+                                        <Span Text="{Binding CurrentUser.address.AddressLine1}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label TextColor="Black">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Street : "  FontAttributes="Bold"/>
+                                        <Span Text="{Binding CurrentUser.address.Street}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label TextColor="Black">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="City : "  FontAttributes="Bold"/>
+                                        <Span Text="{Binding CurrentUser.address.City}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label TextColor="Black">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Country : "  FontAttributes="Bold"/>
+                                        <Span Text="{Binding CurrentUser.address.Country}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label TextColor="Black">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Postal Code : "  FontAttributes="Bold"/>
+                                        <Span Text="{Binding CurrentUser.address.PostalCode}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </StackLayout>
 </ContentPage>

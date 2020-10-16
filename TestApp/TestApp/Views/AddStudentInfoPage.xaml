@@ -4,17 +4,22 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              Visual="Material"
+             Title="Fill Information"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="True"
+             xmlns:behaviors="clr-namespace:TestApp.Behavior"
              x:Class="TestApp.Views.AddStudentInfoPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Entry" >
                 <Setter Property="Margin" Value="5"/>
+                <Setter Property="PlaceholderColor" Value="#3700B3"/>
             </Style>
             <Style TargetType="BoxView" >
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="HeightRequest" Value="1"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="BackgroundColor" Value="Gray"/>
+                <Setter Property="BackgroundColor" Value="#3700B3"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -27,13 +32,21 @@
             <Entry Text="{Binding studentInfo.Gender}" Placeholder="Enter Gender"/>
 
             <!--<Label Text="Email Id"/>-->
-            <Entry Text="{Binding studentInfo.emailId}" Placeholder="Enter Email Id"/>
+            <Entry Text="{Binding studentInfo.emailId}" Placeholder="Enter Email Id">
+                <Entry.Behaviors>
+                    <behaviors:EmailValidatorBehavior/>
+                </Entry.Behaviors>
+            </Entry>
 
             <!--<Label Text="Contact Number"/>-->
-            <Entry Text="{Binding studentInfo.ContactNo}" Placeholder="Enter Contact Number"/>
+            <Entry Text="{Binding studentInfo.ContactNo}" Placeholder="Enter Contact Number">
+                <Entry.Behaviors>
+                    <behaviors:MobileValidatorBehavior/>
+                </Entry.Behaviors>
+            </Entry>
 
             <BoxView/>
-            <Label Text="Address" FontSize="18" FontAttributes="Bold" Margin="10" HorizontalOptions="Center"/>
+            <Label Text="Address" TextColor="#3700B3" FontSize="18" FontAttributes="Bold" Margin="10" HorizontalOptions="Center"/>
             <BoxView/>
             
             <!--<Label Text="Address Line1"/>-->
@@ -66,7 +79,11 @@
                 <Button Text="Upload" BackgroundColor="Transparent" TextColor="Black" Visual="Default" x:Name="UploadPanCardButton" Clicked="UploadPanCardButton_Clicked"/>
             </StackLayout>
             <Image x:Name="PanImage" HeightRequest="50" WidthRequest="50"/>-->
-            <Button Text="Save" Command="{Binding SaveCommand}"/>
+            <Button Text="Save" Command="{Binding SaveCommand}"
+                    TextColor="White"
+                   Margin="10"
+                    HorizontalOptions="CenterAndExpand"
+                    BackgroundColor="Crimson"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

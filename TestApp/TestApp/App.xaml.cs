@@ -13,7 +13,7 @@ namespace TestApp
 {
     public partial class App
     {
-        public User CurrentUser { get; set; }
+        public static User CurrentUser { get; set; }
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -23,7 +23,7 @@ namespace TestApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-            
+            CurrentUser = new User();    
             DBHelper.CreateTables();
 
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");

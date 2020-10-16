@@ -10,6 +10,12 @@ namespace TestApp.Views
         {
             InitializeComponent();
             _viewModel = BindingContext as LoginPageViewModel;
+            UserNameEntry.Unfocused += UserNameEntry_Unfocused;
+        }
+
+        private void UserNameEntry_Unfocused(object sender, FocusEventArgs e)
+        {
+            _viewModel.CheckUser();
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

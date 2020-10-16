@@ -15,11 +15,23 @@ namespace TestApp.Model
             get { return _id; }
             set { SetProperty(ref _id, value); }
         }
+        private string _userID;
+        public string UserId
+        {
+            get { return _userID; }
+            set { SetProperty(ref _userID, value); }
+        }
         private string _name;
         public string Name
         {
             get { return _name; }
             set { SetProperty(ref _name, value); }
+        }
+        private string _userName;
+        public string UserName
+        {
+            get { return _userName; }
+            set { SetProperty(ref _userName, value); }
         }
         private string _gender;
         public string Gender
@@ -53,8 +65,8 @@ namespace TestApp.Model
             get { return _contactNo; }
             set { SetProperty(ref _contactNo, value); }
         }
-        private bool _isAudited;
-        public bool IsAudited
+        private bool _isAudited = false;
+        public bool IsAudited 
         {
             get { return _isAudited; }
             set { SetProperty(ref _isAudited, value); }

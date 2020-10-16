@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using Prism.Common;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -18,6 +19,12 @@ namespace TestApp.ViewModels
             get { return _studentInfo; }
             set { SetProperty(ref _studentInfo, value); }
         }
+        private bool _IsNew;
+        public bool IsNew
+        {
+            get { return _IsNew; }
+            set { SetProperty(ref _IsNew, value); }
+        }
         public DelegateCommand SaveCommand { get; set; }
         public IGenericRepo<StudentInfo> _studentInfoRepo { get; set; }
         public IGenericRepo<AddressInfo> _addressRepo { get; set; }
@@ -36,12 +43,30 @@ namespace TestApp.ViewModels
             var a =await PageDialogService.DisplayAlertAsync("","Do you want to save this?","Yes","No");
             if (a)
             {
-                studentInfo.StudentId = Guid.NewGuid().ToString();
-                studentInfo.address.AddressId = Guid.NewGuid().ToString();
-                studentInfo.address.StudentID = studentInfo.StudentId;
+                if (IsNew)
+                {
+                    studentInfo.StudentId = Guid.NewGuid().ToString();
+                    studentInfo.UserId = App.CurrentUser.UserId;
+                    studentInfo.address.AddressId = Guid.NewGuid().ToString();
+                    studentInfo.address.StudentID = studentInfo.StudentId;
+                    studentInfo.Class = "F.Y.J.C";
+                }
+
                 _studentInfoRepo.InsertOrReplace(studentInfo);
                 _addressRepo.InsertOrReplace(studentInfo.address);
                 await NavigationService.GoBackAsync();
+            }
+        }
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            if (parameters.ContainsKey("CurrentUser"))
+            {
+                studentInfo = parameters["CurrentUser"] as StudentInfo;
+                if (string.IsNullOrEmpty(studentInfo.StudentId))
+                    IsNew = true;
+                else
+                    IsNew = false;
             }
         }
     }

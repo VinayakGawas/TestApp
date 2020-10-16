@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TestApp.Model;
 using TestApp.Repo;
+using TestApp.Views;
 
 namespace TestApp.ViewModels
 {
@@ -32,7 +33,7 @@ namespace TestApp.ViewModels
 
         private async void CancelRegistration()
         {
-            var response = await PageDialogService.DisplayAlertAsync("Cancel0", "Do you want to cancel?\n All the data will be lost", "Yes","No");
+            var response = await PageDialogService.DisplayAlertAsync("Cancel", "Do you want to cancel?\n All the data will be lost", "Yes","No");
             if (response)
                 await NavigationService.GoBackAsync();
             else
@@ -47,10 +48,11 @@ namespace TestApp.ViewModels
                     _user.UserId = Guid.NewGuid().ToString();
                     _user.Role = "Student";
                     _userRepo.Insert(_user);
+                    App.CurrentUser = _user;
+                    NavigationService.NavigateAsync(nameof(HomePage));
                 }
                 else
-                {
-                    PageDialogService.DisplayAlertAsync("Duplicate User", "Sorry, this username is not available. \n Please try with different Username", "OK");
+                { 
                     return;
                 }
         }

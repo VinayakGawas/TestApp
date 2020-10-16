@@ -5,19 +5,32 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Visual="Material"
              NavigationPage.HasNavigationBar="False"
-             x:Class="TestApp.Views.LoginPage">
-    <Frame HasShadow="True" Padding="10">
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-        <Entry Text="{Binding _user.UserName}" Placeholder="Enter Username" Margin="10"/>
-        <Entry Text="{Binding _user.Password}" IsPassword="True" Placeholder="Enter Password" Margin="10"/>
-            <Button Text="Login" Command="{Binding LoginCommand}" HorizontalOptions="Center" Margin="20"/>
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="True"
+             x:Class="TestApp.Views.LoginPage"
+             >
 
-            <Label Text="Register" FontSize="Small" FontAttributes="Bold" TextDecorations="Underline">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#6200EE">
+            <Frame Margin="25"  VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                <Label Text="Login " TextColor="#6200EE" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="20"/>
+                <Entry Text="{Binding _user.UserName}" x:Name="UserNameEntry"
+                       PlaceholderColor="#3700b3"
+                       Placeholder="Enter Username" Margin="10"/>
+        <Entry Text="{Binding _user.Password}" IsPassword="True" 
+                PlaceholderColor="#3700b3"
+               Placeholder="Enter Password" Margin="10"/>
+            <Button Text="Login" Command="{Binding LoginCommand}" HorizontalOptions="Center"
+                    BackgroundColor="#3700b3" TextColor="White"
+                    Margin="20"/>
+
+                <Label Text="Register" TextColor="#3700b3" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" TextDecorations="Underline">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Label.GestureRecognizers>
             </Label>
-
+                </StackLayout>
+            </Frame>
         </StackLayout>
-    </Frame>
+   
 </ContentPage>

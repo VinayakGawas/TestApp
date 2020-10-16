@@ -4,20 +4,35 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="TestApp.Views.SignUpPage"
-             Visual="Material">
-    <Frame HasShadow="True" Padding="10">
+             Visual="Material"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="True"
+             NavigationPage.HasNavigationBar="False">
+    <Frame HasShadow="True" Padding="10" BackgroundColor="#6200EE">
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-            <Entry Text="{Binding _user.UserName}" x:Name="UserNameEntry" Placeholder="Enter Username" Margin="10"/>
-            <Entry x:Name="PasswordEntry" Placeholder="Enter Password" IsPassword="True" Margin="10"/>
-            <Entry x:Name="ConfirmPasswordEntry" IsPassword="True" Placeholder="Confirm Password" Margin="10"/>
+            <Frame Margin="25"  VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    <Label Text="SignUp " TextColor="#6200EE" FontSize="Large" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="20"/>
+                    <Entry Text="{Binding _user.UserName}" 
+                            PlaceholderColor="#3700b3"
+                           x:Name="UserNameEntry" Placeholder="Enter Username" Margin="10"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Enter Password"
+                    PlaceholderColor="#3700b3"
+                   IsPassword="True" Margin="10"/>
+            <Entry x:Name="ConfirmPasswordEntry"
+                    PlaceholderColor="#3700b3"
+                   IsPassword="True" Placeholder="Confirm Password" Margin="10"/>
             <Label Text="Passwords do not match" TextColor="Red" FontAttributes="Italic" HorizontalTextAlignment="Center"
                x:Name="ErrorLabel" IsVisible="False" HorizontalOptions="CenterAndExpand"/>
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Register" Visual="Default" x:Name="submitBtn" Clicked="submitBtn_Clicked" HorizontalOptions="Center" Margin="20"/>
-                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="Center" Margin="20"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Register" 
+                        BackgroundColor="#3700b3" TextColor="White"
+                        x:Name="submitBtn" Clicked="submitBtn_Clicked" HorizontalOptions="Center" Margin="20"/>
+                <Button Text="Cancel" TextColor="White" BackgroundColor="Crimson"
+                        Command="{Binding CancelCommand}" HorizontalOptions="Center" Margin="20"/>
             </StackLayout>
-
-
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </Frame>
 </ContentPage>

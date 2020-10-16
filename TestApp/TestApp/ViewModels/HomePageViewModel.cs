@@ -20,6 +20,16 @@ namespace TestApp.ViewModels
             get { return _allStudentsList; }
             set { SetProperty(ref _allStudentsList, value); }
         }
+        private StudentInfo _currentUser;
+        public StudentInfo CurrentUser
+        {
+            get { return _currentUser; }
+            set { SetProperty(ref _currentUser, value); }
+        }
+
+       
+
+        public string UserRole { get; set; }
         public DelegateCommand AddInfoCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
         public IGenericRepo<StudentInfo> _studentRepo { get; set; }
@@ -27,14 +37,20 @@ namespace TestApp.ViewModels
         public HomePageViewModel(INavigationService navigationService, IPageDialogService pageDialog,
             IGenericRepo<StudentInfo> studentRepo, IGenericRepo<AddressInfo> addressRepo) : base(navigationService, pageDialog)
         {
+            UserRole = App.CurrentUser.Role;
             _addressRepo = addressRepo;
             _studentRepo = studentRepo;
             AddInfoCommand = new DelegateCommand(AddStudentInfo);
             LogoutCommand = new DelegateCommand(Logout);
             AllStudentsList = new ObservableCollection<StudentInfo>();
+            CurrentUser = new StudentInfo();
+            CurrentUser.address = new AddressInfo();
             LoadData();
         }
-
+        internal void UpdateObject(StudentInfo selectedObj)
+        {
+            _studentRepo.Update(selectedObj);
+        }
         private void LoadData()
         {
             var a = _studentRepo.QueryTable().ToList();
@@ -47,18 +63,35 @@ namespace TestApp.ViewModels
                         item.address = address;
                 }
                 AllStudentsList = new ObservableCollection<StudentInfo>(a);
+
+                var data = AllStudentsList.FirstOrDefault(x=>x.UserId == App.CurrentUser.UserId);
+                if (data == null)
+                {
+                    if(UserRole == "Student")
+                        PageDialogService.DisplayAlertAsync("","Please fill Information","Ok");
+                    else
+                    {
+                        PageDialogService.DisplayAlertAsync("", "No Information to show..!!", "Ok");
+                    }
+                }
+                else
+                {
+                    CurrentUser = data;
+                }
             }
         }
 
         private async void Logout()
         {
             var a = await PageDialogService.DisplayAlertAsync("Log Out?","Do you want to log out?","Yes","No");
-            await NavigationService.NavigateAsync("app:///LoginPage");
+            //await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            await NavigationService.NavigateAsync("app:///NavigationPage/LoginPage");
         }
 
         private void AddStudentInfo()
         {
-            NavigationService.NavigateAsync(nameof(AddStudentInfoPage));
+            //9662476093
+            NavigationService.NavigateAsync(nameof(AddStudentInfoPage),new NavigationParameters { {"CurrentUser", CurrentUser } });
         }
        
     }
